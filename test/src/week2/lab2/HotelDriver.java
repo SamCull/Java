@@ -27,9 +27,9 @@ public class HotelDriver {
 		rooms[1] = roomB;
 		rooms[2] = roomC;
 		
-		for(HotelRoom h: rooms) { //for int x = 0; x<10; x++) x.toString
-			if (h != null)
-			System.out.println("Room: " + h.toString());	
+		for(HotelRoom tempvar: rooms) { //for int x = 0; x<10; x++) x.toString
+			if (tempvar != null)
+			System.out.println("Room: " + tempvar.toString());	
 		}
 		
 		rooms[1].isOccupied();
