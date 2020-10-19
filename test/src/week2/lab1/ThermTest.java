@@ -35,5 +35,6 @@ public class ThermTest
 		tempB = thermB.getCelsius();
 		
 		System.out.println("Temp. of Thermometer B is " + tempB);
+		
 	} // end main
 } // end class ThermTest
