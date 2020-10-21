@@ -65,7 +65,10 @@ public class Car {
 	
 	
 	//NoString
-	
-	
+		@Override
+	public String toString() {
+		return "Car [make=" + make + ", model=" + model + ", engineSize=" + engineSize + ", price=" + price + ", sold="
+				+ sold + "]";
+		}
 	
 }
