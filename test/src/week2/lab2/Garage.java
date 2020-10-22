@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Garage {
 
 	public static void main(String[] args) {
-		
+		 
 		
 		int choice=0;
 		int carTotal=0;
@@ -19,7 +19,7 @@ public class Garage {
 		System.out.println("Please enter a choice:");
 		System.out.println("1.List all cars");
 		System.out.println("2.Enter a car for sale");
-		System.out.println("3.List all cats being sold");
+		System.out.println("3.List all cars being sold");
 		System.out.println("4.Exit");
 		
 		choice = in.nextInt();
@@ -53,8 +53,12 @@ public class Garage {
 			
 			Car c = new Car(make,model,engineSize,price);
 			
+			if(carTotal> 1) {
+				c.sellCar();
+			}
+			
 			cars [carTotal] = c;
-			carTotal++; //increments loop by 1
+			carTotal++; //increments loop by 1 until hits 10
 		}
 			else {
 				System.out.println("You have too many cars");
@@ -63,7 +67,11 @@ public class Garage {
 		
 		
 		else if (choice == 3){
-		System.out.println("Choice 3");
+			for (Car c: cars)
+				if (c != null) {
+					if (c.isSold())
+						System.out.println(c.toString());
+				}
 		}
 		
 		

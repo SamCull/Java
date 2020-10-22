@@ -26,6 +26,13 @@ public class Car {
 		setEngineSize(engineSize);
 		setPrice(price);
 	}
+	
+	
+	public Car(String make, String model, double engineSize) {
+		setMake(make);
+		setModel(model);
+		setEngineSize(engineSize);
+	}
 
 
 
@@ -58,8 +65,14 @@ public class Car {
 	public boolean isSold() {
 		return sold;
 	}
-	public void setSold(boolean sold) {
-		this.sold = sold;
+	public void sellCar() {
+		if(sold) {
+			System.out.println("This car has already been sold");
+		}
+		else {
+			this.sold = true; //pay attention how this works
+			System.out.println("This car has been sold to you");
+		}
 	}
 	
 	
