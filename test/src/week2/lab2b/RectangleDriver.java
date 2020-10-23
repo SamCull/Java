@@ -9,7 +9,7 @@ public class RectangleDriver {
 		System.out.println(rect);
 		
 		rect.setLength(10.0f);
-		rect.setWidth(20.0f); 
+		rect.setWidth(5.0f); 
 		
 		System.out.println(rect);
 		
@@ -20,8 +20,8 @@ public class RectangleDriver {
 		
 		System.out.println("The area is: " + rect.getArea());
 		System.out.println("The perimeter is: " + rect.getPerimeter());
-		
-		
+			
+		rect.printRectangle();
 	}
 
 }
