@@ -46,8 +46,15 @@ public class Rectangle {
 		return "Rectangle [length=" + length + ", width=" + width + "]";
 	}
 	
-	
-	
+	//Misc Methods
+		public float getArea(){
+			return length * width;
+		}
+		
+		public float getPerimeter() {
+			return (length + width) * 2;
+		}
+			
 	
 	
 	
