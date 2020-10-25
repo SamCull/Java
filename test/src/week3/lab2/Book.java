@@ -21,15 +21,14 @@ public class Book {
 		setStatus('A');
 		setISBN(nextISBN);
 		nextISBN++;
-		noOfBooks++;
+		noOfBooks++; 
 	}
 	
 	
-	//Getters & Setters
+	//Getters & Setters 
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -57,18 +56,22 @@ public class Book {
 	public void setStatus(char status) {
 		this.status = status;
 	}
-	
+	public static int getNoOfBooks() {
+		return noOfBooks;
+	} 
 
-	
-	
+
 	//toString
-	
-	
+	@Override
+	public String toString() {
+		return "Book [name=" + name + ", author=" + author + ", ISBN=" + ISBN + ", genre=" + genre + ", status="
+				+ status + "]";
+	}
 	
 	//Misc Methods
 	public void Borrow() {
-		setStatus('B');
+		setStatus('B'); 
+	}
+
 	}
 	
-
-}
