@@ -11,7 +11,7 @@ public class SavingsAccount {
 	//Constructors
 	public SavingsAccount() {
 		++nextAccNo;
-		setAccNo(nextAccNo);
+		setAccNo(nextAccNo); 
 	}
 	
 	public SavingsAccount(double savingsBalance) {
