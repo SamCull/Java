@@ -14,7 +14,7 @@ public class PairOfDice {
 		dice2 = new Dice (); //a new value - calls Dice Constructor roll()
 	}
 	
-	
+	 
 	
 	public void roll() {
 		dice1.roll();

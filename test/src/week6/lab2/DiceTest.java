@@ -10,7 +10,7 @@ public class DiceTest {
 				myDie.roll();
 				System.out.println(myDie.getFaceValues());
 			}
-		}//end main
+		}//end main 
 	}//end class
 
 

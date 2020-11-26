@@ -9,8 +9,6 @@ public class Dice {
 	//Variables
 	private int faceValue;
 
-
-
 	
 	//Constructors 
 //Q. Constructor method should call the method Roll. use superclass
