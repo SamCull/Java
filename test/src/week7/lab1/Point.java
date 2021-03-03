@@ -6,8 +6,6 @@ public class Point {
 	protected int x;
 	protected int y;
 	
-	
-	
 		//Constructors
 	public Point(int x, int y) {
 		setX(x);

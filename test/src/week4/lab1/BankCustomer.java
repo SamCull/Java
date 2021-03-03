@@ -15,7 +15,7 @@ public class BankCustomer {
 		setName(name);
 		setAddress(address);
 	}
-	
+	 
 	
 	//Getters & Setters
 	public String getName() {
@@ -66,7 +66,7 @@ public class BankCustomer {
 		}
 			return balance; 
 	}
-
+ 
 
 	
 	//toString
