@@ -14,7 +14,7 @@ public class Triangle extends TwoDShape {
 		setHeight(height);
 	}
 	
-	//Overridden Getters & Setters
+	//Overridden Methods
 		@Override
 	public double area() {
 		return 0.5 * base * height;

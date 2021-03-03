@@ -14,7 +14,7 @@ public class Rectangle extends TwoDShape {
 			setBreadth(breadth);
 		}
 	
-	//Overridden Getters & Setters
+	//Overridden Methods
 	@Override
 	public double area() {
 		return length * breadth;
