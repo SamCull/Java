@@ -9,4 +9,4 @@ public class LabelTest{  //Sample on car pics
 	labelFrame. setVisible ( true );
 	labelFrame. setLocation ( 500, 250 );
 } // end main
-} // end class
+} // end class 

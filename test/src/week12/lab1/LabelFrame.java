@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 		public LabelFrame() {
 			super( "Testing JLabel" );
 			setLayout( new FlowLayout() );
-		
+		 
 			label1 = new JLabel( "Label with text" );
 			label1 .setToolTipText( "This is label1 " );
 			add( label1 ); // add label to JFrame

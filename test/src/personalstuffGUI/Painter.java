@@ -15,3 +15,4 @@ import javax.swing.JLabel;
 			application . setLocation ( 500, 400 );
 		} // end main
 } // end class
+ 
