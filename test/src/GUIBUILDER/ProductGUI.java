@@ -5,27 +5,29 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 
 public class ProductGUI {
 
 	private JFrame frmProductTable;
 	private JTextField insertProductNametextField;
-	private JTextField insertProductPricetextField;
-	private JTextField insertProductQuantitytextField;
-	private JTextField updateProductNametextField;
-	private JTextField updateProductPricetextField;
+	private JTextField insertProductPricetextField;				
+	private JTextField insertProductQuantitytextField;		
+	private JTextField updateProductNametextField;				
+	private JTextField updateProductPricetextField;				
 	private JTextField updateProductQuantitytextField;
-	private JTable producttable;
+	private JTextField deleteProductIDtextField;
 
 	/**
 	 * Launch the application.
@@ -66,7 +68,7 @@ public class ProductGUI {
 		frmProductTable.getContentPane().add(tabbedPane);
 		
 		
-		//Start of INSERT CUSTOMER
+		//Start of INSERT product
 		JPanel insertP = new JPanel();
 		tabbedPane.addTab("Insert Product", null, insertP, null);
 		insertP.setLayout(null);
@@ -88,8 +90,9 @@ public class ProductGUI {
 				
 		insertProductNametextField = new JTextField();
 		insertProductNametextField.setBounds(153, 23, 148, 26);
-		insertP.add(insertProductNametextField);
 		insertProductNametextField.setColumns(10);
+		insertP.add(insertProductNametextField);
+
 		
 		insertProductPricetextField = new JTextField();
 		insertProductPricetextField.setColumns(10);
@@ -100,115 +103,260 @@ public class ProductGUI {
 		insertProductQuantitytextField.setColumns(10);
 		insertProductQuantitytextField.setBounds(153, 121, 148, 26);
 		insertP.add(insertProductQuantitytextField);
-			
+		
+		JPanel p = new JPanel();	
 		JButton btninsertSubmitButton = new JButton("Submit");
 		btninsertSubmitButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btninsertSubmitButton.setBounds(296, 158, 85, 21);
 		insertP.add(btninsertSubmitButton);
-			//End of Insert Customer
+		
+		//Inserting CONNECTION TO SQL for INSERT PRODUCT
+		frmProductTable.getContentPane().add(p);
+		btninsertSubmitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				Object source = event.getSource();
+
+		        if (source == btninsertSubmitButton) { // if submit button is called
+		        	
+		        		final String DATABASE_URL = "jdbc:mysql://localhost/project";
+		        		Connection connection = null ;
+		        		PreparedStatement pstat = null;
+		        		String productname = insertProductNametextField.getText();
+		        		String productprice = insertProductPricetextField.getText();
+		        		String productquantity= insertProductQuantitytextField.getText();
+		        		
+		        		int i = 0;
+		        		
+		        		{
+		        			try {
+		        		// establish connection to database
+		        		connection = DriverManager.getConnection(DATABASE_URL, "root", "" );
+		        		// create Prepared Statement for inserting data into table
+		        		pstat = connection.prepareStatement("INSERT INTO Product (ProductName, ProductPrice, ProductQuantity ) VALUES (?,?,?)");
+		        		pstat . setString (1, productname );
+		        		pstat . setString (2, productprice);
+		        		pstat . setString (3, productquantity);
+		        		// insert data into table
+		        		i = pstat .executeUpdate();
+		        		JOptionPane.showMessageDialog(frmProductTable, i + " product added to database ");
+		        		}
+		        		catch(SQLException sqlException){
+		        		sqlException . printStackTrace () ;
+		        		}
+		        		finally {
+		        		try {
+		        		pstat . close () ;
+		        		connection. close () ;
+		        		}
+		        		catch (Exception exception){
+		        		exception . printStackTrace () ;
+		        					}
+		        			}//end finally
+		        		}
+		        	
+					
+		        	}//end of if source statement
+		       }//end of actionPerformed 
+			}//end of newAddListener
+			); 
+		//End of Insert Product
 		
 		
-		//Start of UPDATE CUSTOMER
-		JPanel updateC = new JPanel();
-		tabbedPane.addTab("Update Product", null, updateC, null);
-		updateC.setLayout(null);
+			//End of Insert Product
+		
+		
+		//Start of UPDATE Product
+		JPanel updateP = new JPanel();
+		tabbedPane.addTab("Update Product", null, updateP, null);
+		updateP.setLayout(null);
 		
 		JLabel lblupdateProductName = new JLabel("Product Name");
 		lblupdateProductName.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblupdateProductName.setBounds(26, 21, 92, 26);
-		updateC.add(lblupdateProductName);
+		updateP.add(lblupdateProductName);
 		
 		JLabel lblupdateProductPrice = new JLabel("Product Price");
 		lblupdateProductPrice.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblupdateProductPrice.setBounds(26, 71, 92, 26);
-		updateC.add(lblupdateProductPrice);
+		updateP.add(lblupdateProductPrice);
 		
 		JLabel lblupdatePhoneNum = new JLabel("Product Quantity");
 		lblupdatePhoneNum.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblupdatePhoneNum.setBounds(26, 121, 108, 26);
-		updateC.add(lblupdatePhoneNum);
+		updateP.add(lblupdatePhoneNum);
 		
 		JButton btnupdateConfirmButton = new JButton("Confirm Changes");
 		btnupdateConfirmButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnupdateConfirmButton.setBounds(237, 158, 139, 21);
-		updateC.add(btnupdateConfirmButton);
+		updateP.add(btnupdateConfirmButton);
 		
 		updateProductNametextField = new JTextField();
 		updateProductNametextField.setColumns(10);
 		updateProductNametextField.setBounds(149, 21, 148, 26);
-		updateC.add(updateProductNametextField);
+		updateP.add(updateProductNametextField);
 		
 		updateProductPricetextField = new JTextField();
 		updateProductPricetextField.setColumns(10);
 		updateProductPricetextField.setBounds(149, 73, 148, 26);
-		updateC.add(updateProductPricetextField);
+		updateP.add(updateProductPricetextField);
 		
 		updateProductQuantitytextField = new JTextField();
 		updateProductQuantitytextField.setColumns(10);
 		updateProductQuantitytextField.setBounds(149, 121, 148, 26);
-		updateC.add(updateProductQuantitytextField);
-		//End of Update Customer
+		updateP.add(updateProductQuantitytextField);
 		
-		
-		
-		//Start of DISPLAY CUSTOMER
-		JPanel displayC = new JPanel();
-		tabbedPane.addTab("Display Product", null, displayC, null);
-		displayC.setLayout(null);
-		
-		producttable = new JTable();
-		producttable.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		producttable.setFont(new Font("Arial", Font.BOLD, 12));
-		producttable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Product ID", "Product Name", "Product Price", "Product Quantity"},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Product ID", "Product Name", "Product Price", "Product Quantity"
-			}
-		));
-		producttable.setBounds(10, 10, 391, 128);
-		displayC.add(producttable);
-		//End of Display Customer
-		
-		
-		//Start of DELETE CUSTOMER
-		JPanel deleteC = new JPanel();
-		tabbedPane.addTab("Delete Product", null, deleteC, null);
-		deleteC.setLayout(null);
-		
-		JLabel lbldeleteFirstName = new JLabel("First name");
-		lbldeleteFirstName.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lbldeleteFirstName.setBounds(26, 21, 71, 26);
-		deleteC.add(lbldeleteFirstName);
-		
-		JLabel lbldeleteLastName = new JLabel("Last name");
-		lbldeleteLastName.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lbldeleteLastName.setBounds(26, 71, 71, 26);
-		deleteC.add(lbldeleteLastName);
-		
-		JLabel lbldeletePhoneNum = new JLabel("PhoneNumber\r\n");
-		lbldeletePhoneNum.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lbldeletePhoneNum.setBounds(26, 121, 91, 26);
-		deleteC.add(lbldeletePhoneNum);
-		
+		frmProductTable.getContentPane().add(p);
+		btnupdateConfirmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				Object source = event.getSource();
 
+		        if (source == btnupdateConfirmButton) { // if update button is called
+		        	final String DATABASE_URL = "jdbc:mysql://localhost/project";
+					
+			        String productname = updateProductNametextField.getText();
+			        String productprice = updateProductPricetextField.getText();
+			        String productquantity = updateProductQuantitytextField.getText();
+						Connection connection = null;
+						PreparedStatement pstat = null;
+						int i =0;
+									
+						try{
+				              // establish connection to database
+				              connection = DriverManager.getConnection(
+				                  DATABASE_URL, "root","");
+				              // create Prepared Statement for updating table
+				              pstat = connection.prepareStatement("Update Product SET ProductQuantity = ?, ProductPrice = ? WHERE ProductName = ?" );
+				              //replaces position of ? with first and last name and phone number
+				              pstat.setString(1, productquantity);
+				              pstat.setString(2, productprice);
+				              pstat.setString(3, productname);
+				              
+
+				              //Update data in database
+				              i = pstat.executeUpdate();
+				              JOptionPane.showMessageDialog(frmProductTable, i + " product details updated in database ");				          
+				              }//end try
+				          catch(SQLException sqlException ) {
+				              sqlException.printStackTrace();
+				           }
+				
+						finally{
+							try{
+								pstat.close();
+								connection.close();
+							}
+							catch ( Exception exception ){
+								exception.printStackTrace();
+							}
+						} // end finally
+		        }//end if 
+			}// end Action event e
+		});
+		
+		
+		
+		//End of Update product
+		
+		
+		
+		//Start of DISPLAY product
+		JPanel displayP = new JPanel();
+		tabbedPane.addTab("Display Product", null, displayP, null);
+		displayP.setLayout(null);
+		
+	 	JButton btndisplayProductButton = new JButton("Display");
+	 	btndisplayProductButton.setBounds(140, 90, 125, 46);
+	 	displayP.add(btndisplayProductButton);
+
+ 
+	btndisplayProductButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent event) {
+			//Object source = event.getSource();
+	if(event.getSource() == btndisplayProductButton) {
+		//btndisplayproductButton showTable = new JWindow();
+		SearchResultProduct sr = new SearchResultProduct(); 
+		sr.createUI();
+			}//end if
+		}//end actionPerformed
+});//end ActionListener
+	
+	
+		//End of Display product
+		
+		
+		//Start of DELETE product
+		JPanel deleteP = new JPanel();
+		tabbedPane.addTab("Delete Product", null, deleteP, null);
+		deleteP.setLayout(null);
+		
+		JLabel lbldeleteProductID = new JLabel("ProductID");
+		lbldeleteProductID.setFont(new Font("Tahoma", Font.BOLD, 12));	//product LABEL
+		lbldeleteProductID.setBounds(35, 88, 85, 26);
+		deleteP.add(lbldeleteProductID);
+		
+		deleteProductIDtextField = new JTextField();
+		deleteProductIDtextField.setFont(new Font("Arial", Font.PLAIN, 12));	//TEXTFIELD
+		deleteProductIDtextField.setColumns(10);
+		deleteProductIDtextField.setBackground(Color.WHITE);
+		deleteProductIDtextField.setBounds(165, 89, 172, 26);
+		deleteP.add(deleteProductIDtextField);
 		
 		JButton btndeleteDeleteButton = new JButton("Delete");
-		btndeleteDeleteButton.setBackground(Color.decode("#FF3A3A"));
+		btndeleteDeleteButton.setBackground(Color.decode("#FF3A3A"));	//BUTTON
 		btndeleteDeleteButton.setBounds(296, 158, 85, 21);
 		btndeleteDeleteButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		deleteC.add(btndeleteDeleteButton);
+		deleteP.add(btndeleteDeleteButton);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 252, 411, 1);
 		frmProductTable.getContentPane().add(panel);
+		
+		frmProductTable.getContentPane().add(p);
+		btndeleteDeleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				Object source = event.getSource();
+				
+				 if (source == btndeleteDeleteButton) { // if submit button is called
+						final String DATABASE_URL = "jdbc:mysql://localhost/project";
+						
+						Connection connection = null;
+						PreparedStatement pstat = null;	
+						
+						String del= deleteProductIDtextField.getText();
+						
+						
+						int i = 0; //used to tell user if entry was successful	
+						
+						try{
+							// establish connection to database
+							connection = DriverManager.getConnection(
+							DATABASE_URL, "root", "" );
+							// create Statement for deleting from table
+							pstat = connection.prepareStatement("Delete From Product Where ProductID=?");
+							pstat.setString(1, del); //(1, productid)
+							
+							
+							
+							//Delete data in the database
+							i = pstat.executeUpdate();
+							JOptionPane.showMessageDialog(frmProductTable, i + " record successfuly removed from database,");
+							
+						 }
+						catch(SQLException sqlException ) {
+							sqlException.printStackTrace();
+						 }
+						finally{
+							try{
+								pstat.close();
+								connection.close();
+							}
+							catch ( Exception exception ){
+								exception.printStackTrace();
+							}
+						}//end finally
+				 }//end if
+			}//end actionPerformed
+		});//end actionListener
+
 	}
 }
