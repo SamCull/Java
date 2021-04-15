@@ -107,7 +107,7 @@ public class SearchResultCustomer implements ActionListener{
 	}
 	catch(Exception ex)
 	{
-	JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",
+	JOptionPane.showMessageDialog(null, ex.getMessage(),"Error with Connecting to MySQL",
 	JOptionPane.ERROR_MESSAGE);
 	}
 	frame1.add(scroll);
@@ -118,6 +118,7 @@ public class SearchResultCustomer implements ActionListener{
 	public static void main(String args[]) {
 	SearchResultCustomer sr = new SearchResultCustomer();
 	sr.createUI(); 
+	
 		}//end main
 	
 	}//end class
