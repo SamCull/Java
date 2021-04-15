@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
-public class CustomerGUI  { 
+public class CustomerGUI implements ActionListener { 
 
 	private JFrame frmCustomerTable;
 
@@ -30,13 +30,14 @@ public class CustomerGUI  {
 	 * Launch the application.
 	 */
 	public static void main (String[] args) {
-		CustomerGUI cg = new CustomerGUI();
-		cg.initialize();
+		
+		//CustomerGUI cg = new CustomerGUI();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					CustomerGUI window = new CustomerGUI();
-					window.frmCustomerTable.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,11 +45,14 @@ public class CustomerGUI  {
 		});
 	}
 
+
+
 	/**
 	 * Create the application.
 	 */
 	public CustomerGUI() {
 		initialize();
+		frmCustomerTable.setVisible(true);
 	}
 
 	/**
@@ -144,7 +148,7 @@ public class CustomerGUI  {
 		        		JOptionPane.showMessageDialog(frmCustomerTable, i + " customer added to database ");
 		        		}
 		        		catch(SQLException sqlException){
-		        		sqlException . printStackTrace () ;
+		        			JOptionPane.showMessageDialog(frmCustomerTable, "Too many numbers added for phone number, max 10 numbers only"); //Allows only 10 numbers to be entered for phone num
 		        		}
 		        		finally {
 		        		try {
@@ -153,6 +157,7 @@ public class CustomerGUI  {
 		        		}
 		        		catch (Exception exception){
 		        		exception . printStackTrace () ;
+		        		
 		        					}
 		        			}//end finally
 		        		}
@@ -244,7 +249,7 @@ public class CustomerGUI  {
 				              JOptionPane.showMessageDialog(frmCustomerTable, i + " customer details updated in database ");				          
 				              }//end try
 				          catch(SQLException sqlException ) {
-				              sqlException.printStackTrace();
+				        	  JOptionPane.showMessageDialog(frmCustomerTable, "Too many numbers added for phone number, max 10 numbers only"); // if > than 10 numbers in phone
 				           }
 				
 						finally{
@@ -350,7 +355,7 @@ public class CustomerGUI  {
 							
 						 }
 						catch(SQLException sqlException ) {
-							sqlException.printStackTrace();
+							 JOptionPane.showMessageDialog(frmCustomerTable, "ID doesn't exist, please view Display tab to see a list of Customer ID's"); //print this if ID doesn't exist
 						 }
 						finally{
 							try{
@@ -367,4 +372,11 @@ public class CustomerGUI  {
 		
 
 	}//end private void initialise
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 } //end class
