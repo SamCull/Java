@@ -41,7 +41,7 @@ public class InvoiceGUI {
 			public void run() {
 				try {
 					InvoiceGUI window = new InvoiceGUI();
-					window.frmInvoiceTable.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,6 +54,7 @@ public class InvoiceGUI {
 	 */
 	public InvoiceGUI() {
 		initialize();
+		frmInvoiceTable.setVisible(true);
 	}
 
 	/**
