@@ -50,6 +50,7 @@ public class ProductGUI {
 	 */
 	public ProductGUI() {
 		initialize();
+		frmProductTable.setVisible(true);
 	}
 
 	/**
@@ -237,7 +238,8 @@ public class ProductGUI {
 				              JOptionPane.showMessageDialog(frmProductTable, i + " product details updated in database ");				          
 				              }//end try
 				          catch(SQLException sqlException ) {
-				              sqlException.printStackTrace();
+				        	  JOptionPane.showMessageDialog(frmProductTable, "Too many numbers added for phone number, max 10 numbers only"); // if > than 10 numbers in phone
+
 				           }
 				
 						finally{
