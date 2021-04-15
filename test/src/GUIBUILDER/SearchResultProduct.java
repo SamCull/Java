@@ -121,4 +121,3 @@ public class SearchResultProduct implements ActionListener{
 	sr.createUI(); 
 	}
 	}
-
