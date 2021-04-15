@@ -125,4 +125,3 @@ public class SearchResultInvoice implements ActionListener{
 	sr.createUI(); 
 	}
 	}
-
